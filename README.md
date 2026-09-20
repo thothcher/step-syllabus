@@ -35,6 +35,7 @@ assets/js/hero3d.js     3D ხე hero-ზე (საკუთარი რე�
 assets/js/render.js     DOM-ის აგება data.js-დან
 assets/js/trail.js      SVG გზა, განშტოებები, ავატარი
 assets/js/deck.js       პანელის ამოსვლა სქროლზე + სლაიდერი
+assets/js/type.js       hero-ის სათაური თავად იწერება (typing + scramble)
 assets/js/main.js       გაერთიანება
 assets/imgs/images.png  ლოგო (ჰედერი, favicon, apple-touch-icon)
 assets/imgs/og-cover.png  1200×630 სოციალური ქარდი

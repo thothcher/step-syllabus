@@ -15,17 +15,12 @@
     APP.hero3d.init();
     APP.deck.init();
     APP.trail.init();
+    APP.typer.init();
     APP.measure();
-
-    /* highlight the last two words of the hero title with the brand gradient */
-    var h1 = U.qs('.hero__title');
-    if (h1) {
-      var words = U.qsa('.split__w', h1);
-      words.slice(-1).forEach(function (w) { w.classList.add('grad'); });
-    }
 
     APP.boot(function () {
       document.body.classList.add('is-live');
+      APP.typer.start();
       /* fonts change metrics → re-measure the graph once they land */
       if (document.fonts && document.fonts.ready) {
         document.fonts.ready.then(function () {
