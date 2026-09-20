@@ -15,7 +15,6 @@
   var Trail = {
     ready: false,
     blocks: [],      /* {el, id, type, node, branch, rail, y, lit} */
-    lectures: [],    /* y positions of every lecture row */
     lut: [],         /* {len,x,y} samples along the spine */
     total: 0,
     avY: 0,
@@ -69,7 +68,6 @@
     svg.appendChild(gSpine); svg.appendChild(gBranch); svg.appendChild(gNode);
 
     Trail.blocks = [];
-    Trail.lectures = [];
 
     var anchors = [];
 
@@ -110,7 +108,6 @@
           var rp = offsetIn(row, trail);
           var ry = rp.y + 24;
           lastY = ry;
-          Trail.lectures.push(ry);
           if (mobile) return;
           var tw = U.svg('path', {
             'class': 'g-twig',
@@ -209,7 +206,6 @@
     Trail.avScale = mobile ? .74 : 1;
     Trail.H = H;
     Trail.top = trail.getBoundingClientRect().top + (window.scrollY || window.pageYOffset || 0);
-    Trail.lectures.sort(function (a, b) { return a - b; });
     Trail.ready = true;
   }
 
@@ -233,7 +229,7 @@
   }
 
   /* --------------------------------------------------------------- tick */
-  var hudNum, hudKey, hudTitle, hudBar, hudPct, hudLec, railItems, curBlock = -1;
+  var railItems, curBlock = -1;
 
   function tick() {
     if (!Trail.ready) return;
@@ -270,37 +266,15 @@
       if (on) active = i;
     }
 
-    /* HUD + rail */
+    /* rail */
     if (active !== curBlock) {
       curBlock = active;
-      var b2 = Trail.blocks[active];
-      if (b2) {
-        hudKey.textContent = b2.type === 'mod' ? 'MODULE' : 'RELEASE';
-        hudNum.textContent = b2.num;
-        hudNum.classList.toggle('is-rel', b2.type !== 'mod');
-        hudTitle.textContent = b2.title;
-      } else {
-        hudKey.textContent = 'MODULE';
-        hudNum.textContent = '00';
-        hudNum.classList.remove('is-rel');
-        hudTitle.textContent = 'დაწყება';
-      }
       railItems.forEach(function (r, ri) { r.classList.toggle('is-on', ri === active); });
     }
-
-    var pct = U.clamp(Trail.avY / Trail.H, 0, 1);
-    hudBar.style.width = (pct * 100).toFixed(1) + '%';
-    hudPct.textContent = Math.round(pct * 100) + '%';
-
-    var done = 0;
-    for (var l = 0; l < Trail.lectures.length; l++) if (Trail.lectures[l] <= Trail.avY) done++;
-    hudLec.textContent = 'ლექცია ' + done + ' / ' + APP.META.lectures;
   }
 
   APP.trail = {
     init: function () {
-      hudNum = U.qs('#hudNum'); hudKey = U.qs('#hudKey'); hudTitle = U.qs('#hudTitle');
-      hudBar = U.qs('#hudBar'); hudPct = U.qs('#hudPct'); hudLec = U.qs('#hudLec');
       railItems = U.qsa('.rail__i');
       build();
       APP.onResize(function () { build(); curBlock = -1; });
