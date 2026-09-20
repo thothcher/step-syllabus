@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- კონტენტის განახლებისას შეცვალე lastmod.
+     Google Search Console-ში sitemap დაამატე პირდაპირ:
+     https://thothcher.github.io/step-syllabus/sitemap.xml -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://thothcher.github.io/step-syllabus/</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://thothcher.github.io/step-syllabus/assets/imgs/og-cover.png</image:loc>
+      <image:title>AI-Native Front-End Development — სილაბუსი V3</image:title>
+    </image:image>
+  </url>
+</urlset>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- Source for assets/imgs/og-cover.png (1200×630 social share image).
+     Regenerate: open in a browser at exactly 1200×630 and screenshot,
+     or run the headless recipe documented in README.md. -->
+<html lang="ka" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>OG card</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600&family=Noto+Serif+Georgian:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0}
+  html,body{width:1200px;height:630px;overflow:hidden}
+  body{
+    background:#04060E;color:#E9EEFC;position:relative;
+    font-family:'Noto Sans Georgian',system-ui,sans-serif;
+    display:flex;flex-direction:column;justify-content:space-between;
+    padding:58px 64px 54px;
+  }
+  .bg{position:absolute;inset:0;
+    background:
+      linear-gradient(rgba(120,156,235,.055) 1px,transparent 1px) 0 0/100% 84px,
+      linear-gradient(90deg,rgba(120,156,235,.055) 1px,transparent 1px) 0 0/84px 100%,
+      radial-gradient(90% 80% at 78% 40%,rgba(11,40,146,.55),transparent 62%);
+  }
+  .glow{position:absolute;right:-60px;top:-80px;width:760px;height:760px;
+    background:radial-gradient(circle,rgba(62,123,255,.20),transparent 62%);filter:blur(10px)}
+  .row{position:relative;display:flex;align-items:center;gap:16px}
+  .mark{width:58px;height:58px;overflow:hidden;background:#0B2892;flex:none;
+    clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)}
+  .mark img{width:100%;height:100%;object-fit:cover;transform:scale(1.14);display:block}
+  .kick{font-family:ui-monospace,Consolas,monospace;font-size:15px;letter-spacing:.24em;color:#9CABCC}
+  .kick b{color:#E9EEFC;font-weight:500}
+  .kick span{color:#5E6E90;margin:0 10px}
+
+  h1{position:relative;font-family:'Noto Serif Georgian',Georgia,serif;font-weight:600;
+    font-size:74px;line-height:1.0;letter-spacing:-.04em}
+  h1 em{font-style:normal;color:#3E7BFF;text-shadow:0 0 50px rgba(62,123,255,.45)}
+  .lead{position:relative;margin-top:22px;font-size:22px;color:#9CABCC;max-width:30ch;line-height:1.5}
+
+  .stats{position:relative;display:flex;gap:1px;background:rgba(120,156,235,.10);
+    border:1px solid rgba(120,156,235,.10);width:fit-content}
+  .stat{background:#04060E;padding:16px 34px 14px}
+  .stat b{display:block;font-family:'Noto Serif Georgian',Georgia,serif;font-size:40px;
+    line-height:1;letter-spacing:-.03em}
+  .stat i{font-style:normal;font-family:ui-monospace,Consolas,monospace;font-size:12px;
+    letter-spacing:.2em;color:#5E6E90;text-transform:uppercase}
+  .stat--hi b{color:#3E7BFF;font-size:28px;line-height:1.35}
+
+  .tree{position:absolute;right:46px;top:50%;transform:translateY(-50%);width:430px;height:530px;
+    opacity:.85}
+  .tree path{fill:none;stroke-linecap:round}
+  .spine{stroke:#3E7BFF;stroke-width:2.6;filter:drop-shadow(0 0 10px rgba(62,123,255,.7))}
+  .br{stroke:rgba(62,123,255,.55);stroke-width:1.8}
+  .tw{stroke:rgba(120,156,235,.22);stroke-width:1.2}
+  .nd{fill:#3E7BFF;filter:drop-shadow(0 0 9px rgba(62,123,255,.9))}
+  .nd2{fill:none;stroke:rgba(62,123,255,.45);stroke-width:1.4}
+  .dia{fill:#0B2892;stroke:#8FB8FF;stroke-width:1.8;filter:drop-shadow(0 0 14px rgba(62,123,255,.8))}
+</style>
+</head>
+<body>
+  <div class="bg"></div><div class="glow"></div>
+
+  <svg class="tree" viewBox="0 0 430 530" aria-hidden="true">
+    <path class="spine" d="M215 10 C215 90 215 90 215 150 C215 210 215 210 215 270
+                           C215 340 215 340 215 400 C215 470 215 470 215 524"/>
+    <path class="br" d="M215 118 C215 140 258 138 288 138"/>
+    <path class="br" d="M215 232 C215 254 172 252 142 252"/>
+    <path class="br" d="M215 368 C215 390 258 388 288 388"/>
+    <path class="br" d="M215 466 C215 486 172 484 142 484"/>
+    <path class="tw" d="M300 138 L300 186 M300 158 L330 158 M300 186 L330 186"/>
+    <path class="tw" d="M130 252 L130 300 M130 272 L100 272 M130 300 L100 300"/>
+    <path class="tw" d="M300 388 L300 430 M300 408 L330 408 M300 430 L330 430"/>
+    <circle class="nd2" cx="215" cy="118" r="13"/><circle class="nd" cx="215" cy="118" r="5.5"/>
+    <circle class="nd2" cx="215" cy="232" r="13"/><circle class="nd" cx="215" cy="232" r="5.5"/>
+    <circle class="nd2" cx="215" cy="368" r="13"/><circle class="nd" cx="215" cy="368" r="5.5"/>
+    <circle class="nd2" cx="215" cy="466" r="13"/><circle class="nd" cx="215" cy="466" r="5.5"/>
+    <path class="dia" d="M215 291 L239 315 L215 339 L191 315 Z"/>
+    <circle class="nd" cx="288" cy="138" r="4"/><circle class="nd" cx="142" cy="252" r="4"/>
+    <circle class="nd" cx="288" cy="388" r="4"/><circle class="nd" cx="142" cy="484" r="4"/>
+  </svg>
+
+  <div class="row">
+    <span class="mark"><img src="../assets/imgs/images.png" alt=""></span>
+    <span class="kick"><b>IT STEP ACADEMY</b><span>/</span>SYLLABUS V3</span>
+  </div>
+
+  <div>
+    <h1>AI-Native<br>Front-End<br><em>Development</em></h1>
+    <p class="lead">ინტერაქტიული სილაბუსი — პირველი თეგიდან პროდაქშენში გაშვებულ პროდუქტამდე.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>72</b><i>ლექცია</i></div>
+    <div class="stat"><b>11</b><i>მოდული</i></div>
+    <div class="stat"><b>3</b><i>რელიზი</i></div>
+    <div class="stat stat--hi"><b>AI-Native</b><i>workflow</i></div>
+  </div>
+</body>
+</html>

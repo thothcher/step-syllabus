@@ -1,0 +1,13 @@
+# AI-Native Front-End Development — IT Step Academy
+# https://thothcher.github.io/step-syllabus/
+#
+# შენიშვნა: robots.txt მხოლოდ დომენის ძირშია ძალაში. GitHub Pages-ის
+# პროექტის საიტზე (/step-syllabus/) კრაულერი ამ ფაილს არ კითხულობს —
+# ის ეძებს https://thothcher.github.io/robots.txt-ს. ინდექსაციას მართავს
+# index.html-ში ჩაწერილი <meta name="robots">. ეს ფაილი მუშაობდეს დაიწყებს,
+# თუ ოდესმე საკუთარ დომენზე გადახვალ.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://thothcher.github.io/step-syllabus/sitemap.xml
