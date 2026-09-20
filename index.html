@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ka" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI-Native Front-End Development — Syllabus V3</title>
+<meta name="description" content="IT Step Academy — AI-Native Front-End Development. 72 ლექცია, 11 მოდული, 3 რელიზი. ინტერაქტიული სასწავლო რუკა.">
+<meta name="theme-color" content="#04060E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700&family=Noto+Serif+Georgian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/trail.css">
+<link rel="stylesheet" href="assets/css/deck.css">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B2892'/%3E%3Cpath d='M16 5v22M16 11l7 5M16 17l-7 5' stroke='%237FB0FF' stroke-width='2.4' fill='none'/%3E%3C/svg%3E">
+</head>
+
+<body class="is-booting">
+
+<!-- ░░ custom cursor ░░ -->
+<div class="cursor" aria-hidden="true">
+  <div class="cursor__dot"></div>
+  <div class="cursor__ring">
+    <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="21"/></svg>
+  </div>
+  <div class="cursor__label"><span></span></div>
+</div>
+
+<!-- ░░ boot screen ░░ -->
+<div class="boot" id="boot" aria-hidden="true">
+  <div class="boot__inner">
+    <div class="boot__mark">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path class="boot__spine" d="M32 4 V60" />
+        <path class="boot__br" d="M32 20 C32 20 44 20 44 32" />
+        <path class="boot__br" d="M32 34 C32 34 20 34 20 46" />
+        <circle class="boot__node" cx="32" cy="4" r="3"/>
+        <circle class="boot__node" cx="44" cy="32" r="3"/>
+        <circle class="boot__node" cx="20" cy="46" r="3"/>
+        <circle class="boot__node" cx="32" cy="60" r="3"/>
+      </svg>
+    </div>
+    <div class="boot__meta">
+      <span class="boot__label">BUILDING ROADMAP</span>
+      <span class="boot__pct" id="bootPct">00</span>
+    </div>
+    <div class="boot__bar"><i id="bootBar"></i></div>
+  </div>
+</div>
+
+<!-- ░░ fixed chrome ░░ -->
+<header class="topbar">
+  <a class="brand" href="#top" data-cursor="link">
+    <span class="brand__mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 2v20M12 7l6 4M12 13l-6 4" /></svg>
+    </span>
+    <span class="brand__text">
+      <b>IT STEP ACADEMY</b>
+      <i>AI-Native Front-End Development</i>
+    </span>
+  </a>
+
+  <div class="topbar__right">
+    <span class="tag tag--ver">SYLLABUS V3</span>
+    <button class="ghost-btn" id="themeBtn" type="button" data-cursor="link" aria-label="თემის გადართვა">
+      <svg class="ic ic--moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+      <svg class="ic ic--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+      <span class="ghost-btn__txt">Theme</span>
+    </button>
+  </div>
+</header>
+
+<!-- ░░ game HUD ░░ -->
+<aside class="hud" id="hud" aria-hidden="true">
+  <div class="hud__row">
+    <span class="hud__k" id="hudKey">MODULE</span>
+    <span class="hud__n" id="hudNum">00</span>
+  </div>
+  <div class="hud__title" id="hudTitle">დაწყება</div>
+  <div class="hud__bar"><i id="hudBar"></i></div>
+  <div class="hud__row hud__row--foot">
+    <span class="hud__k" id="hudLec">ლექცია 0 / 72</span>
+    <span class="hud__pct" id="hudPct">0%</span>
+  </div>
+</aside>
+
+<!-- ░░ module rail ░░ -->
+<nav class="rail" id="rail" aria-label="მოდულების ნავიგაცია"></nav>
+
+<main id="top">
+
+  <!-- ══════════════════════════════════ HERO ══════════════════════════════ -->
+  <section class="hero" id="hero">
+    <canvas class="hero__canvas" id="tree3d" aria-hidden="true"></canvas>
+    <div class="hero__veil" aria-hidden="true"></div>
+
+    <div class="hero__inner">
+      <div class="hero__kicker" data-rv="up">
+        <span class="dot"></span>
+        <span>IT STEP ACADEMY</span>
+        <span class="sep">/</span>
+        <span>SYLLABUS V3</span>
+      </div>
+
+      <h1 class="hero__title" data-split>AI-Native Front-End Development</h1>
+
+      <p class="hero__lead" data-rv="up" data-rv-delay="220">
+        ეს არ არის თემების სია. ეს არის გზა — პირველი თეგიდან პროდაქშენში გაშვებულ
+        პროდუქტამდე. ჩამოსქროლე და ნახე, სად მიდიხარ.
+      </p>
+
+      <div class="hero__stats" data-rv="up" data-rv-delay="340">
+        <div class="stat"><b data-count="72">0</b><span>ლექცია</span></div>
+        <div class="stat"><b data-count="11">0</b><span>მოდული</span></div>
+        <div class="stat"><b data-count="3">0</b><span>რელიზი</span></div>
+        <div class="stat stat--wide"><b>AI-Native</b><span>workflow</span></div>
+      </div>
+
+      <div class="hero__cta" data-rv="up" data-rv-delay="460">
+        <a class="btn btn--solid" href="#trail" data-cursor="go"><span>გზის დაწყება</span></a>
+        <a class="btn btn--line" href="#outcome" data-cursor="link"><span>რას ვიღებ ბოლოს</span></a>
+      </div>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <span>SCROLL</span>
+      <i></i>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ LEGEND ═══════════════════════════════ -->
+  <section class="legend" id="legend">
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="sec-head__k" data-rv="up">01 — როგორ იკითხება რუკა</span>
+        <h2 class="sec-head__t" data-rv="up" data-rv-delay="90">ეს რუკაა, არა სილაბუსის სია</h2>
+        <p class="sec-head__p" data-rv="up" data-rv-delay="180">
+          ცენტრალური ხაზი კურსია. მისგან გამოდის განშტოებები — ლექციები და თემები.
+          სამ ადგილას ხაზი ჩერდება: იქ შენ პროდუქტს აბარებ.
+        </p>
+      </header>
+
+      <div class="legend__grid">
+        <article class="lcard" data-rv="up">
+          <div class="lcard__ic" aria-hidden="true" data-par="0.10">
+            <svg viewBox="0 0 48 48"><path d="M24 4v40"/><circle cx="24" cy="12" r="3.4"/><circle cx="24" cy="24" r="3.4"/><circle cx="24" cy="36" r="3.4"/></svg>
+          </div>
+          <h3>ხერხემალი</h3>
+          <p>უწყვეტი ხაზი — კურსის ქრონოლოგია. ავატარი შენს პოზიციას აჩვენებს, გავლილი მონაკვეთი ნათდება.</p>
+        </article>
+
+        <article class="lcard" data-rv="up" data-rv-delay="120">
+          <div class="lcard__ic" aria-hidden="true" data-par="0.10">
+            <svg viewBox="0 0 48 48"><path d="M16 4v40"/><path d="M16 16c0 8 6 8 16 8"/><path d="M16 30c0 6 6 6 12 6"/><circle cx="32" cy="24" r="3.4"/><circle cx="28" cy="36" r="3.4"/></svg>
+          </div>
+          <h3>განშტოებები</h3>
+          <p>თითოეული მოდული იხსნება ლექციებად, ლექცია — კონკრეტულ თემებად. არაფერია დამალული.</p>
+        </article>
+
+        <article class="lcard" data-rv="up" data-rv-delay="240">
+          <div class="lcard__ic" aria-hidden="true" data-par="0.10">
+            <svg viewBox="0 0 48 48"><path d="M24 6 42 24 24 42 6 24Z"/><path d="M24 17v14M17 24h14"/></svg>
+          </div>
+          <h3>კონტროლის წერტილები</h3>
+          <p>სამი რელიზი: v0.1, v0.5 და v1.0.0. იატაკიდან ამოდის პანელი — იქ ხედავ, რა პროექტს ქმნი.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ TRAIL ═══════════════════════════════ -->
+  <section class="trail" id="trail">
+    <svg class="trail__svg" id="trailSvg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div class="trail__flow" id="trailFlow"></div>
+  </section>
+
+  <!-- ═══════════════════════════════ OUTCOME ══════════════════════════════ -->
+  <section class="outcome" id="outcome">
+    <div class="wrap">
+      <header class="sec-head sec-head--center">
+        <span class="sec-head__k" data-rv="up">72 / 72</span>
+        <h2 class="sec-head__t" data-rv="up" data-rv-delay="90">კურსის ბოლოს შენ ხარ ინჟინერი,<br>არა კოდის გადამწერი</h2>
+      </header>
+
+      <div class="out-grid" id="outGrid"></div>
+
+      <div class="final" data-rv="up">
+        <div class="final__l">
+          <span class="tag">v1.0.0</span>
+          <h3>პორტფოლიო, რომელიც ლინკით იხსნება</h3>
+          <p>სამი დაცული პროექტი, სუფთა commit-ისტორია, ტესტები და CI/CD — რეალური მტკიცებულება იმისა, რომ პროდაქშენში გაშვება შეგიძლია.</p>
+        </div>
+        <div class="final__r">
+          <div class="kv"><span>ლექცია</span><b>72</b></div>
+          <div class="kv"><span>მოდული</span><b>11</b></div>
+          <div class="kv"><span>რელიზი</span><b>3</b></div>
+          <div class="kv"><span>ფორმატი</span><b>AI-Native</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <div class="foot__brand">
+      <b>IT STEP ACADEMY</b>
+      <span>AI-Native Front-End Development — Syllabus V3</span>
+    </div>
+    <div class="foot__keys">
+      <span><kbd>T</kbd> თემა</span>
+      <span><kbd>←</kbd><kbd>→</kbd> სლაიდერი</span>
+      <span><kbd>Home</kbd> დასაწყისი</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/hero3d.js"></script>
+<script src="assets/js/render.js"></script>
+<script src="assets/js/trail.js"></script>
+<script src="assets/js/deck.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
