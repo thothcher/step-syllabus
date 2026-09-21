@@ -160,48 +160,52 @@
     {
       type: 'checkpoint', id: 'cp1', release: 'v0.1',
       label: 'Static Product',
+      stage: 'ეტაპი 01 — მარკაპი',
       when: 'ლექცია 15 — 16',
       title: 'პირველი რელიზი',
-      lead: 'პირველი პროდუქტი, რომელსაც საჯარო ლინკი აქვს — სემანტიკური მარკაპი, საკუთარი დიზაინ-ტოკენები და GitHub-ზე დაჰოსტილი ბილდი.',
+      lead: 'სამივე რელიზში ერთი და იგივე სამი პროდუქტია — აირჩიე ერთი და ბოლომდე ის გაგყვება. პირველი ვერსია სუფთა მარკაპია: სემანტიკური სტრუქტურა, საკუთარი დიზაინ-ტოკენები და GitHub-ზე დაჰოსტილი ბილდი.',
       projects: [
         {
-          tag: 'ძირითადი', mock: 'list',
-          title: 'GitHub UI Prototype',
-          pitch: 'რეალური პროდუქტის ინტერფეისის რეკონსტრუქცია — header, repo list, tabs, data tables, forms.',
+          tag: 'HORECA', mock: 'grid',
+          title: 'Restaurant',
+          demo: { url: 'https://restaurant.stepacademy.ge/', label: 'restaurant.stepacademy.ge' },
+          pitch: 'რესტორნის საიტი: ჰირო, მენიუს ბადე, გალერეა და ჯავშნის ფორმა — მხოლოდ HTML-ითა და CSS-ით.',
           points: [
             'სემანტიკური სტრუქტურა და სწორი heading hierarchy',
-            'Grid + Flexbox განლაგება, mobile-first breakpoints',
+            'Grid + Flexbox მენიუს ბადისთვის, mobile-first breakpoints',
             'Design tokens და light / dark თემა',
-            'ფორმები ვალიდაციითა და ARIA error states-ით'
+            'ჯავშნის ფორმა ვალიდაციითა და ARIA error states-ით'
           ],
           stack: ['HTML5', 'CSS Grid', 'Flexbox', 'Design Tokens', 'Tailwind', 'Git'],
           deliver: 'GitHub Pages ლინკი · README · Release v0.1'
         },
         {
-          tag: 'ალტერნატივა', mock: 'grid',
-          title: 'Restaurant Landing',
-          pitch: 'კომერციული ლენდინგი მენიუს ბადით, ფასების ცხრილითა და ჯავშნის ფორმით.',
+          tag: 'TRANSPORT', mock: 'list',
+          title: 'Trains',
+          demo: { url: 'https://trains.stepacademy.ge/trains', label: 'trains.stepacademy.ge' },
+          pitch: 'მატარებლების განრიგი: მარშრუტების ცხრილი, ფილტრების პანელი და ბილეთის ბარათი სტატიკურ მარკაპში.',
           points: [
             'Data table vs layout grid — სწორი არჩევანი',
-            'Responsive images და clamp() ტიპოგრაფია',
-            'CSS transitions და keyframes GPU-ზე',
+            'Sticky thead და ცხრილი, რომელიც ტელეფონზე იშლება ბარათებად',
+            'clamp() ტიპოგრაფია და responsive images',
             'a11y აუდიტი მხოლოდ კლავიატურით'
           ],
-          stack: ['Semantic HTML', 'CSS Grid', 'Animations', 'a11y'],
-          deliver: 'დაჰოსტილი ლენდინგი · a11y ჩეკლისტი'
+          stack: ['Semantic HTML', 'CSS Grid', 'Tables', 'Responsive', 'a11y'],
+          deliver: 'დაჰოსტილი განრიგი · a11y ჩეკლისტი · Release v0.1'
         },
         {
-          tag: 'ალტერნატივა', mock: 'dash',
-          title: 'Design System Kit',
-          pitch: 'მინი დიზაინ-სისტემა: ტოკენები, კომპონენტები და მათი ცოცხალი დოკუმენტაცია.',
+          tag: 'E-COMMERCE', mock: 'dash',
+          title: 'Shop',
+          demo: { url: 'https://shop.stepacademy.ge/', label: 'shop.stepacademy.ge' },
+          pitch: 'მაღაზიის ვიტრინა: პროდუქტების ბადე, ფილტრების გვერდითი პანელი, პროდუქტის გვერდი და კალათის ეკრანი.',
           points: [
-            'Color / spacing / radius / motion ტოკენები',
+            'პროდუქტის ბარათი და მისი რვა მდგომარეობა',
+            'CSS transitions და keyframes GPU-ზე',
             'Semantic tokens და თემების გადართვა',
-            'კომპონენტის რვა მდგომარეობა',
             'მიგრაცია Tailwind theme-ზე'
           ],
-          stack: ['CSS Variables', 'SCSS', 'Tailwind', 'Docs'],
-          deliver: 'ცოცხალი style guide · კომპონენტების ბიბლიოთეკა'
+          stack: ['HTML5', 'CSS Variables', 'Flexbox', 'Tailwind', 'Git'],
+          deliver: 'დაჰოსტილი ვიტრინა · ცოცხალი style guide · Release v0.1'
         }
       ]
     },
@@ -350,13 +354,15 @@
     {
       type: 'checkpoint', id: 'cp2', release: 'v0.5',
       label: 'Dynamic Application',
+      stage: 'ეტაპი 02 — JavaScript',
       when: 'გაცემა — ლექცია 24 · წარდგენა — ლექცია 33',
       title: 'მეორე რელიზი',
-      lead: 'აპლიკაცია, რომელიც სერვერთან ლაპარაკობს: ავთენტიფიკაცია, CRUD, გამოთვლები, უცვლელი state და მოდულური არქიტექტურა.',
+      lead: 'იგივე პროდუქტი ცოცხლდება: მონაცემები API-დან, ავთენტიფიკაცია, CRUD, გამოთვლები, უცვლელი state და მოდულური არქიტექტურა — ფრეიმვორქის გარეშე.',
       projects: [
         {
-          tag: 'ძირითადი', mock: 'grid',
-          title: 'Food Ordering App',
+          tag: 'HORECA', mock: 'grid',
+          title: 'Restaurant',
+          demo: { url: 'https://restaurant.stepacademy.ge/', label: 'restaurant.stepacademy.ge' },
           pitch: 'მენიუ API-დან, კალათა, ფასების გამოთვლა, ავტორიზაცია და შეკვეთის სრული ციკლი — სუფთა DOM-ზე.',
           points: [
             'fetch + async/await, try/catch/finally მდგრადობა',
@@ -368,30 +374,32 @@
           deliver: 'MVP Release · მოდულური კოდბეისი · დემო ლექცია 33-ზე'
         },
         {
-          tag: 'ალტერნატივა', mock: 'list',
-          title: 'Task / Kanban Board',
-          pitch: 'დავალებების დაფა სტატუსებით, ფილტრებითა და სერვერულ სინქრონიზაციით.',
-          points: [
-            'CRUD ოპერაციები და DTO mapping',
-            'ფილტრაცია filter() / map() / reduce()-ით',
-            'Guard clause-ები და ბიზნესწესები კოდში',
-            'Duplicate request prevention'
-          ],
-          stack: ['JavaScript', 'REST', 'DTO', 'Immutability'],
-          deliver: 'სამუშაო დაფა · README · ტექნიკური გარჩევა'
-        },
-        {
-          tag: 'ალტერნატივა', mock: 'dash',
-          title: 'Catalog Explorer',
-          pitch: 'კატალოგი ძიებით, ფილტრებით, პაგინაციითა და რჩეულების ლოკალური შენახვით.',
+          tag: 'TRANSPORT', mock: 'list',
+          title: 'Trains',
+          demo: { url: 'https://trains.stepacademy.ge/trains', label: 'trains.stepacademy.ge' },
+          pitch: 'მარშრუტების ძიება, ფილტრები, ადგილის არჩევა და ჯავშნის შენახვა — სია დინამიკურად რენდერდება.',
           points: [
             'დინამიკური რენდერი insertAdjacentHTML()-ით',
-            'ძიება და სორტირება array methods-ით',
-            'LocalStorage როგორც ქეში, სერვერი როგორც წყარო',
-            'Intl.NumberFormat ფასებისთვის'
+            'ძიება, ფილტრაცია და სორტირება filter() / map() / reduce()-ით',
+            'Guard clause-ები და ჯავშნის ბიზნესწესები კოდში',
+            'Intl.DateTimeFormat განრიგისთვის, LocalStorage ჯავშნებისთვის'
           ],
-          stack: ['JavaScript', 'Fetch API', 'LocalStorage', 'Intl'],
-          deliver: 'დაჰოსტილი აპლიკაცია · Release notes'
+          stack: ['JavaScript', 'REST', 'DTO', 'Immutability', 'Intl'],
+          deliver: 'სამუშაო ჯავშნის ნაკადი · README · ტექნიკური გარჩევა'
+        },
+        {
+          tag: 'E-COMMERCE', mock: 'dash',
+          title: 'Shop',
+          demo: { url: 'https://shop.stepacademy.ge/', label: 'shop.stepacademy.ge' },
+          pitch: 'კატალოგი ძიებით, ფილტრებით და პაგინაციით, კალათა და ადმინის CRUD — სერვერი როგორც ერთადერთი წყარო.',
+          points: [
+            'CRUD ოპერაციები და DTO mapping',
+            'LocalStorage როგორც ქეში, სერვერი როგორც წყარო',
+            'Intl.NumberFormat ფასებისთვის და ფინანსური გამოთვლები',
+            'Duplicate request prevention და შეცდომებისგან აღდგენა'
+          ],
+          stack: ['JavaScript', 'Fetch API', 'LocalStorage', 'JWT', 'CRUD', 'Intl'],
+          deliver: 'დაჰოსტილი აპლიკაცია · Release notes v0.5'
         }
       ]
     },
@@ -783,13 +791,15 @@
     {
       type: 'checkpoint', id: 'cp3', release: 'v1.0.0',
       label: 'Production Platform',
+      stage: 'ეტაპი 03 — Angular',
       when: 'ლექცია 71 — 72',
       title: 'საფინალო რელიზი',
-      lead: 'პროდაქშენ დონის Angular პლატფორმა: signals-ზე აგებული state, SSR, ტესტები, AI ასისტენტი და CI/CD-ით გაშვებული v1.0.0.',
+      lead: 'ბოლო ვერსია Angular-ზე: signals-ზე აგებული state, SSR, ტესტები, AI ასისტენტი და CI/CD-ით გაშვებული v1.0.0. ქვემოთ ლინკები ზუსტად იმ პროდუქტებზეა, სადაც უნდა მიხვიდე.',
       projects: [
         {
-          tag: 'ძირითადი', mock: 'dash',
-          title: 'Smart Restaurant Platform',
+          tag: 'HORECA', mock: 'grid',
+          title: 'Restaurant',
+          demo: { url: 'https://restaurant.stepacademy.ge/', label: 'restaurant.stepacademy.ge' },
           pitch: 'სრული პროდუქტი: მენიუ, კალათა, შეკვეთები, ადმინ პანელი და AI ასისტენტი ერთ არქიტექტურაში.',
           points: [
             'NgRx SignalStore — გლობალური cart და single source of truth',
@@ -801,30 +811,32 @@
           deliver: 'ცოცხალი დომენი · v1.0.0 რელიზი · ტესტების რეპორტი'
         },
         {
-          tag: 'ალტერნატივა', mock: 'grid',
-          title: 'B2B Admin Dashboard',
-          pitch: 'მონაცემებზე ორიენტირებული პანელი დიდი ცხრილებით, როლებითა და ანალიტიკით.',
+          tag: 'TRANSPORT', mock: 'list',
+          title: 'Trains',
+          demo: { url: 'https://trains.stepacademy.ge/trains', label: 'trains.stepacademy.ge' },
+          pitch: 'ჯავშნების სისტემა მარშრუტების ძიებით, ვაგონის ინტერაქციული სქემითა და რეალურ დროსთან მიახლოებული სტატუსებით.',
           points: [
-            'CDK Virtual Scroll ათასობით ჩანაწერზე',
-            'Functional guards და RBAC ნავიგაცია',
-            'Interceptors — auth, retry, გლობალური შეცდომები',
-            'i18n და მრავალენოვანი ინტერფეისი'
-          ],
-          stack: ['Angular', 'CDK', 'Interceptors', 'i18n', 'PrimeNG'],
-          deliver: 'დეპლოიმენტი · Lighthouse აუდიტი · დოკუმენტაცია'
-        },
-        {
-          tag: 'ალტერნატივა', mock: 'list',
-          title: 'Booking & Reservation System',
-          pitch: 'ჯავშნების სისტემა დარბაზის ინტერაქციული სქემითა და რეალურ დროსთან მიახლოებული სტატუსებით.',
-          points: [
-            'CDK Drag & Drop მაგიდების რედაქტორისთვის',
+            'rxResource() — მარშრუტების დეკლარაციული ჩატვირთვა',
             'Signal Forms კასტომ ვალიდატორებით',
-            'rxResource() მონაცემების დეკლარაციული ჩატვირთვა',
+            'CDK Virtual Scroll და Drag & Drop ადგილების სქემაზე',
             'a11y — FocusTrap, LiveAnnouncer, კლავიატურა'
           ],
           stack: ['Angular', 'Signal Forms', 'CDK', 'rxResource', 'a11y'],
           deliver: 'დაჰოსტილი სისტემა · ტესტები · SemVer ტეგები'
+        },
+        {
+          tag: 'E-COMMERCE', mock: 'dash',
+          title: 'Shop',
+          demo: { url: 'https://shop.stepacademy.ge/', label: 'shop.stepacademy.ge' },
+          pitch: 'მაღაზია ადმინ პანელით: დიდი ცხრილები, როლები, ანალიტიკა და მრავალენოვანი ინტერფეისი.',
+          points: [
+            'CDK Virtual Scroll ათასობით ჩანაწერზე',
+            'Functional guards და RBAC ნავიგაცია',
+            'Interceptors — auth, retry, გლობალური შეცდომები',
+            'i18n და Core Web Vitals აუდიტი'
+          ],
+          stack: ['Angular', 'CDK', 'Interceptors', 'i18n', 'PrimeNG', 'SSR'],
+          deliver: 'დეპლოიმენტი · Lighthouse აუდიტი · დოკუმენტაცია'
         }
       ]
     }

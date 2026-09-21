@@ -95,13 +95,46 @@
     return '<div class="mock mock--list">' + bar + '<div class="mock__body">' + rows + '</div></div>';
   }
 
+  function demoHTML(d) {
+    if (!d || !d.url) return '';
+    return '<a class="pj__demo" href="' + U.esc(d.url) + '" target="_blank" rel="noopener noreferrer" ' +
+      'draggable="false" data-cursor="go" data-cursor-label="live">' +
+      '<span class="pj__demo-k">ცოცხალი დემო</span>' +
+      '<span class="pj__demo-u">' + U.esc(d.label || d.url) + '</span>' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>' +
+    '</a>';
+  }
+
+  function frameHTML(p) {
+    if (!p.demo || !p.demo.url) return '<div class="pj__mock">' + mockHTML(p.mock) + '</div>';
+    var u = U.esc(p.demo.url), t = U.esc(p.title);
+    return '<div class="pj__frame" data-frame>' +
+      '<div class="pj__skel" aria-hidden="true">' + mockHTML(p.mock) + '</div>' +
+      '<iframe class="pj__if" data-src="' + u + '" title="' + t + ' — ცოცხალი დემო" ' +
+        'referrerpolicy="no-referrer-when-downgrade" loading="lazy" tabindex="-1"></iframe>' +
+      '<div class="pj__shield" data-cursor="drag" data-cursor-label="drag" aria-hidden="true"></div>' +
+      '<span class="pj__live" aria-hidden="true"><i></i>LIVE</span>' +
+      '<div class="pj__fbar">' +
+        '<button class="pj__toggle" type="button" data-live-toggle aria-pressed="false" data-cursor="link">' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 9-6 1.5L10.6 20 5 3Z"/></svg>' +
+          '<span>ინტერაქცია</span>' +
+        '</button>' +
+        '<a class="pj__open" href="' + u + '" target="_blank" rel="noopener noreferrer" ' +
+          'data-cursor="go" data-cursor-label="open"><span>ახალ ფანჯარაში</span>' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>' +
+      '</div>' +
+      '<span class="pj__slow" aria-hidden="true">იტვირთება…</span>' +
+    '</div>';
+  }
+
   function projectHTML(p) {
     return '<article class="pj">' +
-      '<div class="pj__mock">' + mockHTML(p.mock) + '</div>' +
+      frameHTML(p) +
       '<div class="pj__body">' +
         '<span class="pj__tag">' + U.esc(p.tag) + '</span>' +
         '<h4>' + U.esc(p.title) + '</h4>' +
         '<p class="pj__pitch">' + U.esc(p.pitch) + '</p>' +
+        demoHTML(p.demo) +
         '<ul class="pj__pts">' + p.points.map(function (x) { return '<li>' + U.esc(x) + '</li>'; }).join('') + '</ul>' +
         '<div class="pj__stack">' + p.stack.map(function (x) { return '<span>' + U.esc(x) + '</span>'; }).join('') + '</div>' +
         '<div class="pj__deliver"><b>Deliverable</b><span>' + U.esc(p.deliver) + '</span></div>' +
@@ -120,6 +153,8 @@
         '<div class="cp__floor" aria-hidden="true"></div>' +
         '<div class="cp__beam" aria-hidden="true"></div>' +
         '<div class="cp__slot" aria-hidden="true"></div>' +
+        '<div class="cp__roof" aria-hidden="true"></div>' +
+        '<div class="cp__beam cp__beam--roof" aria-hidden="true"></div>' +
         '<div class="cp__sky" aria-hidden="true">' +
           '<span class="cp__eyebrow">CHECKPOINT</span>' +
           '<b class="cp__big">' + U.esc(c.release) + '</b>' +
@@ -132,6 +167,7 @@
                 '<span class="tag">RELEASE ' + U.esc(c.release) + '</span>' +
                 '<span class="cp__when">' + U.esc(c.when) + '</span>' +
                 '<span class="cp__when">' + U.esc(c.label) + '</span>' +
+                (c.stage ? '<span class="cp__stage-tag">' + U.esc(c.stage) + '</span>' : '') +
               '</div>' +
               '<h3 class="cp__title">' + U.esc(c.title) + '</h3>' +
               '<p class="cp__lead">' + U.esc(c.lead) + '</p>' +

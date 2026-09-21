@@ -15,13 +15,13 @@
     linear-gradient(var(--grid-c) 1px,transparent 1px) 0 0/100% 46px,
     linear-gradient(90deg,var(--grid-c) 1px,transparent 1px) 0 0/46px 100%;
   mask-image:linear-gradient(0deg,#000 8%,transparent 72%);
-  opacity:.9;pointer-events:none
+  opacity:calc(.9 * (1 - var(--exit,0) * .8));pointer-events:none
 }
 .cp__slot{
   position:absolute;left:50%;top:calc(50% + 31vh);width:min(1120px,92vw);height:2px;
   transform:translateX(-50%);
   background:linear-gradient(90deg,transparent,var(--brand-hi),transparent);
-  opacity:calc(.25 + var(--open,0) * .75);
+  opacity:calc((.25 + var(--open,0) * .75) * (1 - var(--exit,0)));
   box-shadow:0 0 calc(18px + var(--open,0)*40px) color-mix(in srgb,var(--brand-hi) 65%,transparent);
   pointer-events:none
 }
@@ -30,15 +30,31 @@
   transform:translateX(-50%) translateY(-100%);
   background:linear-gradient(0deg,color-mix(in srgb,var(--brand-hi) 26%,transparent),transparent 72%);
   mask-image:linear-gradient(0deg,#000,transparent 82%);
-  opacity:calc(var(--open,0) * .85);filter:blur(8px);pointer-events:none;
+  opacity:calc(var(--open,0) * .85 * (1 - var(--exit,0)));filter:blur(8px);pointer-events:none;
   transition:opacity .2s linear
+}
+
+/* ------------------------------------------ the roof it takes off into */
+.cp__roof{
+  position:absolute;left:50%;top:calc(50% - 38vh);width:min(1120px,92vw);height:2px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,var(--brand-hi),transparent);
+  opacity:calc(var(--exit,0) * .95);
+  box-shadow:0 0 calc(18px + var(--exit,0)*46px) color-mix(in srgb,var(--brand-hi) 65%,transparent);
+  pointer-events:none
+}
+.cp__beam--roof{
+  top:calc(50% - 38vh);height:46vh;transform:translateX(-50%);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--brand-hi) 26%,transparent),transparent 72%);
+  mask-image:linear-gradient(180deg,#000,transparent 82%);
+  opacity:calc(var(--exit,0) * .85)
 }
 
 /* ------------------------------------------------ headline in the void */
 .cp__sky{
   position:absolute;left:50%;top:clamp(48px,13vh,140px);transform:translateX(-50%);
   display:grid;justify-items:center;gap:6px;text-align:center;pointer-events:none;z-index:1;
-  opacity:calc(1 - var(--open,0) * .92)
+  opacity:calc((1 - var(--open,0) * .92) * (1 - var(--exit,0)))
 }
 .cp__eyebrow{font-family:var(--f-mono);font-size:10px;letter-spacing:.42em;color:var(--ink-3);text-indent:.42em}
 .cp__big{
@@ -54,13 +70,18 @@
 .cp__panel{
   position:relative;background:var(--surface);border:1px solid var(--line);
   clip-path:polygon(var(--notch) 0,100% 0,100% calc(100% - var(--notch)),calc(100% - var(--notch)) 100%,0 100%,0 var(--notch));
-  transform-origin:50% 100%;
-  transform:translateY(calc((1 - var(--open,0)) * 58%))
-            rotateX(calc((1 - var(--open,0)) * 74deg + var(--ty,0deg)))
-            rotateY(var(--tx,0deg))
+  /* never taller than the window it is centred in — the sticky wrapper clips,
+     and what gets clipped first is the slider controls at the bottom */
+  display:flex;flex-direction:column;max-height:calc(100svh - 132px);
+  /* --open lifts it off the floor · --exit throws it up through the roof */
+  transform-origin:50% calc(100% - var(--exit,0) * 50%);
+  transform:translate3d(0,
+              calc((1 - var(--open,0)) * 58% - var(--exit,0) * 120%),
+              calc(var(--exit,0) * 190px))
+            rotateX(calc((1 - var(--open,0)) * 74deg - var(--exit,0) * 58deg))
             scale(calc(.94 + var(--open,0) * .06));
   transition:box-shadow .4s linear;
-  opacity:calc(.12 + var(--open,0) * .88);
+  opacity:calc((.12 + var(--open,0) * .88) * (1 - var(--exit,0) * .88));
   box-shadow:0 40px 90px -50px rgba(0,0,0,.95),
              0 0 calc(var(--open,0) * 90px) -30px color-mix(in srgb,var(--brand-hi) 70%,transparent);
   will-change:transform,opacity
@@ -68,23 +89,25 @@
 .cp__panel::before{content:'';position:absolute;left:0;top:0;height:2px;width:100%;background:var(--grad);
   transform:scaleX(var(--open,0));transform-origin:left}
 
-.cp__head{padding:clamp(22px,3vw,38px) clamp(22px,3vw,40px) clamp(16px,2vw,22px);
-  display:grid;gap:10px;border-bottom:1px solid var(--line-2)}
+.cp__head{padding:clamp(16px,2vw,26px) clamp(22px,3vw,40px) clamp(12px,1.4vw,16px);
+  flex:none;display:grid;gap:8px;border-bottom:1px solid var(--line-2)}
 .cp__meta{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
 .cp__when{font-family:var(--f-mono);font-size:10px;letter-spacing:.18em;color:var(--ink-3);text-transform:uppercase}
-.cp__title{font-size:clamp(22px,2.6vw,34px);letter-spacing:-.03em}
-.cp__lead{color:var(--ink-2);font-size:14px;max-width:70ch}
+.cp__title{font-size:clamp(22px,2.6vw,32px);letter-spacing:-.03em}
+.cp__lead{color:var(--ink-2);font-size:13.5px;max-width:104ch}
 
 /* ---------------------------------------------------------------- slider */
-.sl{position:relative}
-.sl__view{overflow:hidden}
-.sl__track{display:flex;will-change:transform;transition:transform .85s var(--e-out)}
+.sl{position:relative;flex:1;min-height:0;display:flex;flex-direction:column}
+.sl__view{overflow:hidden;flex:1;min-height:0}
+.sl__track{display:flex;will-change:transform;transition:transform .85s var(--e-out);height:100%}
 .sl__track.is-drag{transition:none}
 .pj{flex:0 0 100%;display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);
-  gap:clamp(18px,2.4vw,34px);padding:clamp(20px,2.6vw,34px) clamp(22px,3vw,40px) clamp(24px,3vw,36px)}
+  align-content:start;overflow-y:auto;
+  gap:clamp(18px,2.4vw,34px);padding:clamp(16px,2vw,26px) clamp(22px,3vw,40px) clamp(14px,1.6vw,20px)}
 @media (max-width:860px){
   .pj{grid-template-columns:1fr;overflow-y:auto;-webkit-overflow-scrolling:touch}
-  .pj__mock{display:none}
+  /* embeds are desktop-scale and heavy — phones get the link instead */
+  .pj__mock,.pj__frame{display:none}
   .cp__panel{max-height:86svh;display:flex;flex-direction:column}
   .cp__head{flex:none}
   .sl{flex:1;min-height:0;display:flex;flex-direction:column}
@@ -95,22 +118,23 @@
 }
 
 .pj__tag{display:inline-block;font-family:var(--f-mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--brand-hi);padding:4px 9px;background:color-mix(in srgb,var(--brand-hi) 12%,transparent);margin-bottom:12px}
-.pj h4{font-family:var(--f-display);font-size:clamp(20px,2.2vw,28px);font-weight:600;letter-spacing:-.03em;margin-bottom:10px}
-.pj__pitch{color:var(--ink-2);font-size:14px;margin-bottom:16px;max-width:54ch}
-.pj__pts{display:grid;gap:7px;margin-bottom:18px}
-.pj__pts li{position:relative;padding-left:18px;font-size:13px;color:var(--ink-2);line-height:1.55}
-.pj__pts li::before{content:'';position:absolute;left:0;top:8px;width:7px;height:7px;background:var(--grad)}
-.pj__stack{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:18px}
+  color:var(--brand-hi);padding:4px 9px;background:color-mix(in srgb,var(--brand-hi) 12%,transparent);margin-bottom:10px}
+.pj h4{font-family:var(--f-display);font-size:clamp(20px,2.2vw,26px);font-weight:600;letter-spacing:-.03em;margin-bottom:8px}
+.pj__pitch{color:var(--ink-2);font-size:13.5px;margin-bottom:12px;max-width:54ch}
+.pj__pts{display:grid;gap:6px;margin-bottom:14px}
+.pj__pts li{position:relative;padding-left:18px;font-size:13px;color:var(--ink-2);line-height:1.5}
+.pj__pts li::before{content:'';position:absolute;left:0;top:7px;width:7px;height:7px;background:var(--grad)}
+.pj__stack{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
 .pj__stack span{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;color:var(--ink-2);
   padding:5px 9px;border:1px solid var(--line);background:var(--surface-2)}
-.pj__deliver{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;padding-top:14px;border-top:1px solid var(--line-2)}
+.pj__deliver{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;padding-top:12px;border-top:1px solid var(--line-2)}
 .pj__deliver b{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--brand-hi)}
 .pj__deliver span{font-size:12.5px;color:var(--ink-2)}
 
 /* slider ui */
-.sl__ui{display:flex;align-items:center;gap:14px;padding:0 clamp(22px,3vw,40px) clamp(20px,2.4vw,28px)}
-.sl__btn{width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--line);
+.sl__ui{flex:none;display:flex;align-items:center;gap:14px;
+  padding:0 clamp(22px,3vw,40px) clamp(14px,1.6vw,18px)}
+.sl__btn{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--line);
   color:var(--ink-2);transition:color .35s,border-color .35s,background .35s,transform .35s var(--e-out);
   clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
 .sl__btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
@@ -164,3 +188,86 @@
 .mock--dash .chart i:nth-child(6){height:74%}
 
 @media (prefers-reduced-motion:reduce){ .mock::after{animation:none;opacity:0} }
+
+/* ------------------------------------------------------- live demo links */
+.cp__stage-tag{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;color:var(--brand-hi);
+  padding:4px 9px;border:1px solid color-mix(in srgb,var(--brand-hi) 34%,transparent);
+  background:color-mix(in srgb,var(--brand-hi) 10%,transparent)
+}
+
+/* the real site, embedded: rendered at 1280px wide and scaled into the card,
+   so what you see is the desktop layout, not the mobile one */
+.pj__frame{
+  /* start-aligned so the ratio sizes it, never the grid row */
+  position:relative;align-self:start;aspect-ratio:16/10;overflow:hidden;background:var(--bg-2);
+  border:1px solid var(--line);transition:border-color .4s,box-shadow .4s;
+  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)
+}
+.pj__if{
+  position:absolute;left:0;top:0;width:1280px;height:800px;border:0;background:#fff;
+  transform-origin:0 0;transform:scale(var(--fs,.28));
+  opacity:0;transition:opacity .7s var(--e-out);pointer-events:none
+}
+.pj__skel{position:absolute;inset:0;transition:opacity .7s var(--e-out)}
+.pj__skel .mock{width:100%;height:100%;aspect-ratio:auto;border:0;clip-path:none}
+.pj__frame[data-state="ready"] .pj__if{opacity:1}
+.pj__frame[data-state="ready"] .pj__skel{opacity:0}
+
+/* the shield keeps wheel + drag on the page until you ask for the embed */
+.pj__shield{position:absolute;inset:0;z-index:2}
+.pj__frame.is-interactive{border-color:color-mix(in srgb,var(--brand-hi) 62%,transparent);
+  box-shadow:0 0 34px -12px color-mix(in srgb,var(--brand-hi) 75%,transparent)}
+.pj__frame.is-interactive .pj__shield{pointer-events:none}
+.pj__frame.is-interactive .pj__if{pointer-events:auto}
+
+.pj__live{position:absolute;left:10px;top:10px;z-index:3;display:flex;align-items:center;gap:6px;
+  font-family:var(--f-mono);font-size:9px;letter-spacing:.22em;text-indent:.22em;color:#fff;
+  padding:5px 9px;background:var(--grad);opacity:0;transition:opacity .5s}
+.pj__frame[data-state="ready"] .pj__live{opacity:.94}
+.pj__live i{width:5px;height:5px;border-radius:50%;background:#fff;flex:none;
+  animation:pjpulse 1.9s ease-in-out infinite}
+@keyframes pjpulse{0%,100%{opacity:1}50%{opacity:.22}}
+
+.pj__fbar{position:absolute;right:8px;bottom:8px;z-index:3;display:flex;align-items:center;gap:6px}
+.pj__toggle,.pj__open{display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+  font-family:var(--f-mono);font-size:9.5px;letter-spacing:.1em;color:var(--ink-2);
+  padding:6px 9px;border:1px solid var(--line);background:var(--surface);
+  transition:color .3s,border-color .3s,background .3s}
+.pj__toggle svg,.pj__open svg{width:12px;height:12px;flex:none}
+.pj__open svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pj__toggle svg{fill:currentColor}
+.pj__toggle:hover,.pj__open:hover{color:#fff;border-color:transparent;background:var(--grad)}
+.pj__frame.is-interactive .pj__toggle{color:#fff;border-color:transparent;background:var(--grad)}
+.pj__toggle:focus-visible,.pj__open:focus-visible{outline:2px solid var(--brand-hi);outline-offset:2px}
+
+.pj__slow{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;color:var(--ink-3);
+  padding:7px 12px;background:var(--surface);border:1px solid var(--line);
+  opacity:0;transition:opacity .4s;pointer-events:none;white-space:nowrap}
+.pj__frame[data-state="loading"] .pj__slow,
+.pj__frame[data-state="slow"] .pj__slow{opacity:1}
+.pj__frame[data-state="slow"] .pj__slow::after{content:' · გახსენი ახალ ფანჯარაში'}
+
+/* the embed carries its own open-in-a-tab button, so this link is the
+   phone-sized route to the same place — see the media query below */
+.pj__demo{display:none;align-items:center;gap:10px;margin-bottom:18px;padding:9px 14px;
+  border:1px solid var(--line);background:var(--surface-2);text-decoration:none;-webkit-user-drag:none;
+  clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);
+  transition:border-color .35s,background .35s,transform .35s var(--e-out)}
+.pj__demo-k{font-family:var(--f-mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--brand-hi);transition:color .35s}
+.pj__demo-u{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);transition:color .35s}
+.pj__demo svg{width:13px;height:13px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round;color:var(--brand-hi);
+  transition:color .35s,transform .35s var(--e-out)}
+.pj__demo:hover{border-color:transparent;background:var(--grad);transform:translateY(-2px)}
+.pj__demo:hover .pj__demo-k,.pj__demo:hover .pj__demo-u,.pj__demo:hover svg{color:#fff}
+.pj__demo:hover svg{transform:translate(2px,-2px)}
+.pj__demo:focus-visible{outline:2px solid var(--brand-hi);outline-offset:3px}
+@media (max-width:860px){ .pj__demo{display:inline-flex} }
+@media (max-width:420px){ .pj__demo-k{display:none} }
+@media (prefers-reduced-motion:reduce){
+  .pj__live i{animation:none}
+  .pj__demo:hover{transform:none}
+}
